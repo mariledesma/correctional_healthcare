@@ -1,5 +1,7 @@
 # Correctional Healthcare Risk and Compliance Management System
 
+<img width="601" height="313" alt="image" src="https://github.com/user-attachments/assets/b95877fc-f694-4e2a-b192-fd0b65d4c276" />
+
 A full-stack healthcare compliance dashboard for correctional facilities.
 
 ## Technologies
