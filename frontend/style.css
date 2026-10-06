@@ -1,0 +1,505 @@
+
+/* =========================================
+   1. GLOBAL STYLES
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Times New Roman", Times, serif;
+    background-color: #f9eaa8;
+    color: #FFE78C;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    transition: 0.2s;
+}
+
+button:hover {
+    opacity: 0.88;
+}
+
+
+/* =========================================
+   2. MAIN DASHBOARD LAYOUT
+========================================= */
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* =========================================
+   3. SIDEBAR
+========================================= */
+
+.sidebar {
+    width: 250px;
+    background-color: #FFC98C;
+    color: white;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.logo {
+    margin-bottom: 45px;
+}
+
+.logo h2 {
+    font-size: 25px;
+    margin-bottom: 14px;
+    color: #57431D;
+}
+
+.logo p {
+    font-size: 18px;
+    color: #57431D;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.nav-link {
+    color: #57431D;
+    text-decoration: none;
+    padding: 13px 15px;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background-color: #efd8ae;
+    color: #57431D;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding-top: 30px;
+    color: #E8CCBC;
+}
+
+.sidebar-footer p {
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+
+.sidebar-footer small {
+    font-size: 14px;
+    color: #E8CCBC;
+}
+
+
+/* =========================================
+   4. MAIN CONTENT
+========================================= */
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+    padding: 35px;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #362014; /*this is "dashboard" text*/
+}
+
+.page-header p,
+.section-header p {
+    font-size: 14px;
+    color: #362014; /*this is subtitle text under "dashboard"*/
+}
+
+
+/* =========================================
+   5. BUTTONS
+========================================= */
+
+.primary-btn {
+    background-color: #D1855A;
+    color: #362014;
+}
+
+.secondary-btn {
+    background-color: #362014;
+    color: #ffffff;
+    border: 1px solid #FCD9C2;
+}
+
+.edit-btn {
+    background-color: #FCD9C2;
+    color: #362014;
+    padding: 7px 11px;
+    font-size: 12px;
+}
+
+.delete-btn {
+    background-color: #fdeaea;
+    color: #c53d3d;
+    padding: 7px 11px;
+    font-size: 12px;
+}
+
+
+/* =========================================
+   6. SUMMARY CARDS
+========================================= */
+
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    margin-bottom: 35px;
+}
+
+.summary-card {
+    background-color:  rgb(130, 97, 74);
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid #d79c75;
+    box-shadow: 0 2px 8px rgba(25, 45, 75, 0.03);
+}
+
+.summary-card p {
+    font-size: 14px;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.summary-card h2 {
+    font-size: 32px;
+    color: #ffffff;
+}
+
+
+/* =========================================
+   7. CONTENT SECTIONS
+========================================= */
+
+.content-section {
+    background-color: rgb(130, 97, 74);
+    border: 1px solid #FCD9C2;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px #ffffff;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 22px;
+}
+
+.section-header h2 {
+    font-size: 20px;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+
+/* =========================================
+   8. TABLES
+========================================= */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+thead {
+    background-color: rgb(99, 72, 56);
+}
+
+th {
+    padding: 15px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: #FCD9C2;
+    font-weight: 600;
+}
+
+td {
+    padding: 16px 15px;
+    font-size: 13px;
+    color: #FCD9C2;
+    border-bottom: 1px solid #edf0f5;
+}
+
+tbody tr:hover {
+    background-color: #fafbfd;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+td button {
+    margin-right: 5px;
+}
+
+
+/* =========================================
+   9. STATUS MESSAGES
+========================================= */
+
+.status-message {
+    display: none;
+    padding: 14px 18px;
+    border-radius: 7px;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.status-message.success {
+    display: block;
+    background-color: #FCD9C2;
+    color: #216e3a;
+}
+
+.status-message.error {
+    display: block;
+    background-color: #FCD9C2;
+    color: #a52e2e;
+}
+
+
+/* =========================================
+   10. MODAL
+========================================= */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 480px;
+    background-color: rgb(130, 97, 74);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.modal-header h2 {
+    font-size: 21px;
+    color: #FFFFFF;
+}
+
+.close-btn {
+    background-color: transparent;
+    color: #FCD9C2;
+    font-size: 27px;
+    padding: 0 5px;
+}
+
+#check-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#check-form label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #FCD9C2;
+}
+
+#check-form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #FCD9C2;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    outline: none;
+}
+
+#check-form input:focus {
+    border-color: #D1855A;
+    box-shadow: 0 0 0 3px rgba(40, 104, 199, 0.1);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+
+/* =========================================
+   11. RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 1000px) {
+    .sidebar {
+        width: 210px;
+    }
+
+    .main-content {
+        padding: 25px;
+    }
+
+    .summary-cards {
+        gap: 15px;
+    }
+
+    .summary-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 750px) {
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .logo {
+        margin-bottom: 20px;
+    }
+
+    .sidebar nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .sidebar-footer {
+        display: none;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .summary-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .page-header,
+    .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .content-section {
+        padding: 18px;
+    }
+}
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#stateFilter,
+#countyFilter {
+    padding: 10px 14px;
+    border: 1px solid #d9e0ea;
+    border-radius: 8px;
+    background: rgb(130, 97, 74);
+    font-size: 14px;
+    color: #fbfbfc;
+    cursor: pointer;
+    min-width: 160px;
+}
+/* =========================================
+   12. BACK TO TOP BUTTON
+========================================= */
+.back-to-top {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+
+    padding: 12px 18px;
+
+    background: #f9f8f7;
+    color:  rgb(130, 97, 74);
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: none;
+    z-index: 1000;
+}
+
+.back-to-top:hover {
+    opacity: 0.9;
+}
+/*sun logo above title*/
+.sidebar-logo {
+    display: block;
+    width: 170px;
+    height: auto;
+    margin: 0 auto 10px auto;
+}
+
+.logo {
+    text-align: center;
+}
