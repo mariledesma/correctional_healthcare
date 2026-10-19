@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Correctional Healthcare Dashboard</title>
+
+    <!-- Connect the CSS stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Main dashboard container -->
+    <div class="dashboard">
+
+        <!-- Sidebar navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+            <img src="sun.png" alt="Sunrise Care sun logo" class="sidebar-logo">
+            <h2>Sunrise Care</h2>
+            <p>Correctional Healthcare</p>
+            </div>
+
+            <nav>
+                <a href="#" class="nav-link active">Dashboard</a>
+                <a href="#facilities" class="nav-link">Facilities</a>
+                <a href="#compliance" class="nav-link">Compliance Checks</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>Healthcare Compliance</p>
+                <small>Facility Management System</small>
+            </div>
+        </aside>
+
+        <!-- Main content area -->
+        <main class="main-content">
+
+            <!-- Page header -->
+            <header class="page-header">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p>Monitor facility compliance and healthcare operations.</p>
+                </div>
+
+                <button id="refresh-btn" class="secondary-btn">
+                    Refresh Data
+                </button>
+            </header>
+
+            <!-- Summary cards -->
+            <section class="summary-cards">
+
+                <div class="summary-card">
+                    <p>Total Facilities</p>
+                    <h2 id="total-facilities">—</h2>
+                </div>
+
+                <div class="summary-card">
+                    <p>Total Compliance Checks</p>
+                    <h2 id="total-checks">—</h2>
+                </div>
+
+                <div class="summary-card">
+                    <p>Total Violations</p>
+                    <h2 id="total-violations">—</h2>
+                </div>
+
+            </section>
+
+            <!-- Facilities section -->
+<!-- Facilities section -->
+<section id="facilities" class="content-section">
+
+    <div class="section-header">
+        <div>
+            <h2>Facilities</h2>
+            <p>View facilities registered in the database by state and county.</p>
+        </div>
+
+        <div class="facility-filters">
+            <select id="stateFilter">
+                <option value="ALL">All States</option>
+            </select>
+
+            <select id="countyFilter">
+                <option value="ALL">All Counties</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Facility ID</th>
+                    <th>Facility Name</th>
+                    <th>County</th>
+                    <th>State</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="facilities-table">
+                <tr>
+                    <td colspan="5">Loading facilities...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</section>
+
+
+
+
+
+            <!-- Compliance checks section -->
+            <section id="compliance" class="content-section">
+                <div class="section-header">
+                    <div>
+                        <h2>Compliance Checks</h2>
+                        <p>Review and manage facility compliance records.</p>
+                    </div>
+
+                    <button id="add-check-btn" class="primary-btn">
+                        + Add Compliance Check
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Check ID</th>
+                                <th>Facility ID</th>
+                                <th>Violations</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="compliance-table">
+                            <tr>
+                                <td colspan="4">Loading compliance checks...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Status message area -->
+            <div id="status-message" class="status-message" role="status"></div>
+
+        </main>
+    </div>
+
+    <!-- Add / Edit Compliance Check Modal -->
+    <div id="check-modal" class="modal hidden">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2 id="modal-title">Add Compliance Check</h2>
+                <button id="close-modal-btn" class="close-btn" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+
+            <form id="check-form">
+
+                <label for="check-id">Check ID</label>
+                <input
+                    type="text"
+                    id="check-id"
+                    placeholder="Example: CC0000003"
+                    required
+                >
+
+                <label for="facility-id">Facility ID</label>
+                <input
+                    type="text"
+                    id="facility-id"
+                    placeholder="Example: 10002798"
+                    required
+                >
+
+                <label for="violation-count">Violation Count</label>
+                <input
+                    type="number"
+                    id="violation-count"
+                    min="0"
+                    value="0"
+                    required
+                >
+
+                <div class="modal-actions">
+                    <button type="button" id="cancel-btn" class="secondary-btn">
+                        Cancel
+                    </button>
+
+                    <button type="submit" id="save-check-btn" class="primary-btn">
+                        Save Check
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+<button id="back-to-top" class="back-to-top">
+    ↑ Back to Top
+</button>
+    <!-- Connect the JavaScript file -->
+    <script src="script.js"></script>
+
+</body>
+</html>

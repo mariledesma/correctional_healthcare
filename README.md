@@ -10,9 +10,10 @@ A full-stack healthcare compliance dashboard for correctional facilities.
 - FastAPI
 - SQLAlchemy
 - PostgreSQL
-- HTML
-- CSS
+- React
+- Vite
 - JavaScript
+- CSS
 
 ## Features
 

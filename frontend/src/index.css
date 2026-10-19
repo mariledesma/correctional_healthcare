@@ -1,0 +1,17 @@
+:root {
+  font-family: "Times New Roman", Times, serif;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+}

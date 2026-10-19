@@ -1,0 +1,469 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #f8f5ef;
+  color: #4d4037;
+  font-family: "Times New Roman", Times, serif;
+}
+
+button,
+select {
+  font-family: inherit;
+}
+
+/* APP */
+
+.app {
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 245px;
+  height: 100vh;
+
+  padding: 30px 20px;
+
+  background: #f6c66f;
+  color: #5c422a;
+
+  box-shadow: 4px 0 14px rgba(100, 75, 45, 0.12);
+}
+
+/* LOGO */
+
+.logo {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.sidebar-logo {
+  display: block;
+  width: 92px;
+  height: auto;
+
+  margin: 0 auto 15px;
+}
+
+.logo h2 {
+  margin: 0;
+
+  font-size: 30px;
+  font-weight: bold;
+
+  color: #604126;
+}
+
+.logo p {
+  margin-top: 7px;
+
+  font-size: 15px;
+
+  color: #745337;
+}
+
+/* SIDEBAR NAVIGATION */
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.sidebar nav a {
+  padding: 12px 14px;
+
+  border-radius: 6px;
+
+  color: #5d4028;
+
+  text-decoration: none;
+
+  font-size: 17px;
+  font-weight: bold;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.sidebar nav a:hover {
+  background: #ffe1a3;
+  transform: translateX(3px);
+}
+
+/* MAIN CONTENT */
+
+.main-content {
+  margin-left: 245px;
+
+  padding: 38px;
+
+  background: #f8f5ef;
+
+  min-height: 100vh;
+}
+
+/* PAGE HEADER */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 28px;
+
+  padding: 28px 30px;
+
+  background: #fffdf8;
+
+  border: 1px solid #e3d7c7;
+  border-radius: 10px;
+
+  box-shadow: 0 3px 12px rgba(90, 67, 48, 0.05);
+}
+
+.page-header h1 {
+  margin: 0 0 8px;
+
+  font-size: 34px;
+
+  color: #6f4a2d;
+}
+
+.page-header p {
+  margin: 0;
+
+  color: #786b60;
+
+  font-size: 17px;
+}
+
+/* BUTTONS */
+
+.refresh-button {
+  padding: 11px 20px;
+
+  border: none;
+  border-radius: 6px;
+
+  background: #e7a24c;
+
+  color: white;
+
+  font-size: 15px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.refresh-button:hover {
+  background: #cf8c38;
+  transform: translateY(-1px);
+}
+
+/* SUMMARY CARDS */
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 20px;
+
+  margin-bottom: 28px;
+}
+
+.summary-card {
+  padding: 24px 25px;
+
+  background: #fffdf8;
+
+  border: 1px solid #e3d8ca;
+  border-top: 4px solid #efb458;
+
+  border-radius: 8px;
+
+  box-shadow: 0 3px 10px rgba(90, 67, 48, 0.04);
+}
+
+.summary-card p {
+  margin: 0 0 10px;
+
+  color: #817266;
+
+  font-size: 15px;
+}
+
+.summary-card h2 {
+  margin: 0;
+
+  color: #6f4a2d;
+
+  font-size: 31px;
+}
+
+/* CONTENT SECTIONS */
+
+.content-section {
+  margin-bottom: 32px;
+
+  padding: 27px;
+
+  background: #fffdf8;
+
+  border: 1px solid #e3d8ca;
+  border-radius: 8px;
+
+  box-shadow: 0 3px 12px rgba(90, 67, 48, 0.04);
+}
+
+/* SECTION HEADER */
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 22px;
+}
+
+.section-header h2 {
+  margin: 0 0 6px;
+
+  color: #6f4a2d;
+
+  font-size: 26px;
+}
+
+.section-header p {
+  margin: 0;
+
+  color: #7a6d62;
+
+  font-size: 15px;
+}
+
+/* FILTERS */
+
+.facility-filters {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.facility-filters select {
+  min-width: 160px;
+
+  padding: 10px 13px;
+
+  background: #ffffff;
+
+  border: 1px solid #d7cabb;
+  border-radius: 5px;
+
+  color: #57493e;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  outline: none;
+}
+
+.facility-filters select:focus {
+  border-color: #e7a24c;
+
+  box-shadow: 0 0 0 2px rgba(231, 162, 76, 0.12);
+}
+
+/* TABLES */
+
+.table-container {
+  width: 100%;
+
+  overflow-x: auto;
+
+  border: 1px solid #ddd3c8;
+  border-radius: 6px;
+}
+
+table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  background: #ffffff;
+}
+
+thead {
+  background: #f2bd67;
+}
+
+th {
+  padding: 13px 15px;
+
+  text-align: left;
+
+  color: #583b25;
+
+  font-size: 14px;
+  font-weight: bold;
+
+  border-bottom: 1px solid #d6c4af;
+}
+
+td {
+  padding: 13px 15px;
+
+  text-align: left;
+
+  color: #4e443d;
+
+  font-size: 14px;
+
+  border-bottom: 1px solid #ece4dc;
+}
+
+tbody tr:nth-child(even) {
+  background: #fffaf2;
+}
+
+tbody tr:hover {
+  background: #fff3df;
+}
+
+/* ERROR */
+
+.error-message {
+  margin-bottom: 20px;
+
+  padding: 13px 16px;
+
+  background: #fff4e8;
+
+  color: #9a5d2b;
+
+  border: 1px solid #edcda9;
+  border-radius: 6px;
+}
+
+/* BACK TO TOP */
+
+.back-to-top {
+  position: fixed;
+
+  right: 25px;
+  bottom: 25px;
+
+  padding: 11px 17px;
+
+  background: #e7a24c;
+
+  color: white;
+
+  border: none;
+  border-radius: 6px;
+
+  font-size: 14px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  box-shadow: 0 3px 10px rgba(120, 88, 44, 0.14);
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-to-top:hover {
+  background: #cf8c38;
+  transform: translateY(-1px);
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1ece5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d8a35e;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c38d49;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  .sidebar {
+    position: relative;
+
+    width: 100%;
+    height: auto;
+
+    padding-bottom: 30px;
+  }
+
+  .sidebar nav {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 25px;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 20px;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 15px;
+  }
+
+  .facility-filters {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .facility-filters select {
+    flex: 1;
+    min-width: 140px;
+  }
+}
