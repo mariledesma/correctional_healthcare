@@ -1,0 +1,265 @@
+
+.rr-page {
+  width: 100%;
+  padding: 28px;
+  color: #1f2937;
+  box-sizing: border-box;
+}
+
+.rr-page * {
+  box-sizing: border-box;
+}
+
+.rr-header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: #111827;
+}
+
+.rr-header p,
+.rr-section-header p {
+  color: #6b7280;
+  font-size: 14px;
+  margin: 5px 0 0;
+}
+
+.rr-tabs {
+  display: flex;
+  gap: 10px;
+  margin: 24px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.rr-tabs button {
+  padding: 12px 20px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #6b7280;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.rr-tabs button.active {
+  color: #2563eb;
+  border-bottom-color: #2563eb;
+}
+
+.rr-tabs button:hover {
+  color: #2563eb;
+}
+
+.rr-card {
+  background: #ffffff;
+  padding: 24px;
+  margin-bottom: 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.rr-card h2 {
+  margin: 0 0 16px;
+  font-size: 18px;
+  color: #111827;
+}
+
+.rr-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.rr-section-header h2 {
+  margin-bottom: 4px;
+}
+
+.rr-facility-grid,
+.rr-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.rr-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.rr-field input,
+.rr-field select {
+  width: 100%;
+  min-height: 42px;
+  padding: 9px 12px;
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.rr-field input:focus,
+.rr-field select:focus {
+  outline: 2px solid #93c5fd;
+  border-color: #2563eb;
+}
+
+.rr-field input:disabled {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.rr-hint {
+  color: #6b7280;
+  font-size: 12px;
+  margin: 12px 0 0;
+}
+
+.rr-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.rr-button:hover:not(:disabled) {
+  filter: brightness(0.94);
+}
+
+.rr-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.rr-primary {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}
+
+.rr-edit {
+  color: #1d4ed8;
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+
+.rr-delete {
+  color: #b91c1c;
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.rr-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.rr-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  text-align: left;
+}
+
+.rr-table th,
+.rr-table td {
+  padding: 13px 15px;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.rr-table th {
+  color: #374151;
+  background: #f9fafb;
+  font-weight: 700;
+}
+
+.rr-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.rr-record-id {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.rr-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.rr-empty {
+  padding: 34px 15px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.rr-alert {
+  padding: 13px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.rr-success {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+}
+
+.rr-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
+.rr-form-card {
+  border-color: #bfdbfe;
+}
+
+.rr-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+@media (max-width: 760px) {
+  .rr-page {
+    padding: 16px;
+  }
+
+  .rr-facility-grid,
+  .rr-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rr-section-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .rr-tabs {
+    flex-wrap: wrap;
+  }
+}
