@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, Float
 from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
@@ -11,6 +11,8 @@ class Facility(Base):
     facility_name = Column(String)
     county = Column(String)
     state = Column(String)
+    latitude = Column(Float)
+    longitude = Column(Float)
 
 
 class ComplianceCheck(Base):
