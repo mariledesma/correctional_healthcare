@@ -554,15 +554,12 @@ def get_facility_risks(db: Session = Depends(get_db)):
             (0.30, hospital_score),
             (0.30, staffing_score),
         ]
-
         available = [
             (weight, score)
             for weight, score in components
             if score is not None
         ]
-
         if available:
-            # Reweight when one or more categories lack data.
             weighted_sum = sum(
                 weight * score
                 for weight, score in available
