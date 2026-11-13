@@ -1,0 +1,50 @@
+services:
+  db:
+    image: postgis/postgis:17-3.5
+    environment:
+      POSTGRES_DB: correctional_healthcare
+      POSTGRES_USER: healthcare
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in the root .env}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U healthcare -d correctional_healthcare"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  redis:
+    image: redis:7-alpine
+    command: [redis-server, --save, "", --appendonly, "no"]
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      DATABASE_URL: postgres://healthcare:${POSTGRES_PASSWORD}@db:5432/correctional_healthcare
+      REDIS_URL: redis://redis:6379/
+      BIND_ADDRESS: 0.0.0.0:8000
+      CORS_ORIGINS: http://localhost:8080
+      CACHE_TTL_SECONDS: 30
+      RUST_LOG: info
+    command: [sh, -c, "/app/api --migrate && /app/api --enable-postgis && exec /app/api"]
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+  web:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "127.0.0.1:8080:80"
+    depends_on:
+      api:
+        condition: service_healthy
+volumes:
+  postgres_data:

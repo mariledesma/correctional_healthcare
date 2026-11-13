@@ -3,8 +3,10 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import "./App.css";
 import FacilityMap from "./pages/FacilityMap";
 import RiskRecords from "./RiskRecords";
+import { useAuth } from "./auth-context";
+import Features from "./Features";
 
-const API_URL = "http://127.0.0.1:8000";
+import { API_URL, apiFetch } from "./api";
 
 // ----------------------------------------
 // Risk percentage formatting and colors
@@ -37,6 +39,7 @@ function getRiskColor(score) {
 }
 
 function App() {
+  const { user, logout } = useAuth();
   // ======================================
   // PAGE NAVIGATION
   // ======================================
@@ -68,43 +71,13 @@ function App() {
       setError("");
       setRiskError("");
 
-      const [
-        facilityResponse,
-        complianceResponse,
-        riskResponse,
-      ] = await Promise.all([
-        fetch(`${API_URL}/facilities`),
-        fetch(`${API_URL}/compliance-checks`),
-        fetch(`${API_URL}/facility-risks`),
-      ]);
+      const response = await apiFetch(`${API_URL}/dashboard`);
+      if (!response.ok) throw new Error("Could not load dashboard data.");
+      const data = await response.json();
+      setAllFacilities(data.facilities);
+      setComplianceChecks(data.compliance_checks);
+      setFacilityRisks(data.facility_risks);
 
-      if (!facilityResponse.ok) {
-        throw new Error("Could not load facilities.");
-      }
-
-      if (!complianceResponse.ok) {
-        throw new Error("Could not load compliance checks.");
-      }
-
-      const facilityData = await facilityResponse.json();
-      const complianceData = await complianceResponse.json();
-
-      setAllFacilities(facilityData);
-      setComplianceChecks(complianceData);
-
-      // Risk endpoint is optional until backend is updated.
-      if (riskResponse.ok) {
-        const riskData = await riskResponse.json();
-
-        setFacilityRisks(
-          Array.isArray(riskData) ? riskData : []
-        );
-      } else {
-        setFacilityRisks([]);
-        setRiskError(
-          "Facility risk scores are unavailable. Check the /facility-risks endpoint."
-        );
-      }
     } catch (err) {
       console.error(err);
       setError(err.message || "Unable to load dashboard data.");
@@ -340,7 +313,10 @@ function App() {
           <p>Correctional Healthcare</p>
         </div>
 
+        <p>{user.username} · {user.role}</p>
         <nav>
+          {[['analysis','Risk explanations'],['spatial','Nearby facilities'],['password','Change password'],...(user.role==='admin' ? [['accounts','User accounts'],['audit','Audit trail']] : [])].map(([page,label]) => <button key={page} className="sidebar-link" onClick={() => setActivePage(page)}>{label}</button>)}
+          <button className="sidebar-link" onClick={() => logout().catch(() => {})}>Sign out</button>
 
           <button
             type="button"
@@ -391,10 +367,10 @@ function App() {
 
       <main className="main-content">
 
-        {activePage === "map" ? (
+        {["accounts", "audit", "analysis", "spatial", "password"].includes(activePage) ? (<Features key={activePage} page={activePage} facilities={allFacilities} />) : activePage === "map" ? (
 
           // FACILITY MAP
-          <FacilityMap riskByFacility={riskByFacility} />
+          <FacilityMap riskByFacility={riskByFacility} facilities={allFacilities} loading={loading} error={error} />
 
         ) : activePage === "risk-records" ? (
 

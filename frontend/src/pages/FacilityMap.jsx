@@ -11,7 +11,7 @@ import {
 import "leaflet/dist/leaflet.css";
 import "./FacilityMap.css";
 
-const API_URL = "http://127.0.0.1:8000";
+
 
 // ==========================================
 // RISK COLORS
@@ -124,11 +124,10 @@ function MapAutoZoom({
 
 export default function FacilityMap({
   riskByFacility = {},
+  facilities = [],
+  loading = false,
+  error = "",
 }) {
-  const [facilities, setFacilities] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
   const [selectedState, setSelectedState] =
     useState("ALL");
 
@@ -141,51 +140,6 @@ export default function FacilityMap({
   // LOAD FACILITIES
   // ========================================
 
-  useEffect(() => {
-    const controller = new AbortController();
-
-    async function loadFacilities() {
-      try {
-        setLoading(true);
-        setError("");
-
-        const response = await fetch(
-          `${API_URL}/facilities`,
-          { signal: controller.signal }
-        );
-
-        if (!response.ok) {
-          throw new Error(
-            "Unable to retrieve facility locations."
-          );
-        }
-
-        const data = await response.json();
-
-        if (!Array.isArray(data)) {
-          throw new Error(
-            "Unexpected facility response."
-          );
-        }
-
-        if (!controller.signal.aborted) {
-          setFacilities(data);
-        }
-      } catch (err) {
-        if (err.name !== "AbortError") {
-          setError(err.message);
-        }
-      } finally {
-        if (!controller.signal.aborted) {
-          setLoading(false);
-        }
-      }
-    }
-
-    loadFacilities();
-
-    return () => controller.abort();
-  }, []);
 
   // ========================================
   // STATE FILTER OPTIONS

@@ -1,9 +1,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import "./RiskRecords.css";
+import { useAuth } from "./auth-context";
 
 // FastAPI backend
-const API_URL = "http://127.0.0.1:8000";
+import { API_URL, apiFetch } from "./api";
 
 // Configuration for both CRUD sections
 const CONFIG = {
@@ -110,6 +111,7 @@ async function readResponse(response) {
 }
 
 export default function RiskRecords() {
+  const { user } = useAuth();
   const [category, setCategory] = useState("hospital");
   const [facilities, setFacilities] = useState([]);
   const [facilityId, setFacilityId] = useState("");
@@ -137,7 +139,7 @@ export default function RiskRecords() {
 
     async function loadFacilities() {
       try {
-        const response = await fetch(`${API_URL}/facilities`, {
+        const response = await apiFetch(`${API_URL}/facilities`, {
           signal: controller.signal,
         });
 
@@ -209,7 +211,7 @@ export default function RiskRecords() {
           `${API_URL}${config.endpoint}` +
           `?facility_id=${encodeURIComponent(facilityId)}`;
 
-        const response = await fetch(url, {
+        const response = await apiFetch(url, {
           signal: controller.signal,
         });
 
@@ -240,7 +242,7 @@ export default function RiskRecords() {
       `${API_URL}${config.endpoint}` +
       `?facility_id=${encodeURIComponent(facilityId)}`;
 
-    const response = await fetch(url);
+    const response = await apiFetch(url);
     const data = await readResponse(response);
     setRecords(data);
   }
@@ -349,7 +351,7 @@ export default function RiskRecords() {
       : `${API_URL}${config.endpoint}`;
 
     try {
-      const response = await fetch(url, {
+      const response = await apiFetch(url, {
         method,
         headers: {
           "Content-Type": "application/json",
@@ -392,7 +394,7 @@ export default function RiskRecords() {
     setMessage("");
 
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `${API_URL}${config.endpoint}/${encodeURIComponent(recordId)}`,
         { method: "DELETE" }
       );
@@ -530,7 +532,7 @@ export default function RiskRecords() {
             type="button"
             className="rr-button rr-primary"
             onClick={startCreate}
-            disabled={!facilityId}
+            disabled={!facilityId || user.role === "viewer"}
           >
             + Add Record
           </button>
@@ -579,6 +581,7 @@ export default function RiskRecords() {
                           <button
                             type="button"
                             className="rr-button rr-edit"
+                            disabled={user.role === "viewer"}
                             onClick={() => startEdit(record)}
                           >
                             Edit
@@ -587,7 +590,7 @@ export default function RiskRecords() {
                           <button
                             type="button"
                             className="rr-button rr-delete"
-                            disabled={deletingId === id}
+                            disabled={deletingId === id || user.role !== "admin"}
                             onClick={() => handleDelete(record)}
                           >
                             {deletingId === id

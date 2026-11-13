@@ -1,0 +1,66 @@
+# Prepared deployment template. Nothing is provisioned until you apply this file.
+# These resource plans incur charges; review them in Render before creating resources.
+services:
+  - type: web
+    name: healthcare-api
+    runtime: docker
+    plan: 0.5c-512mb
+    region: ohio
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    preDeployCommand: /app/api --migrate
+    healthCheckPath: /health
+    autoDeployTrigger: "off"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: healthcare-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: keyvalue
+          name: healthcare-cache
+          property: connectionString
+      - key: BIND_ADDRESS
+        value: 0.0.0.0:8000
+      - key: CORS_ORIGINS
+        sync: false
+      - key: CACHE_TTL_SECONDS
+        value: "30"
+      - key: RUST_LOG
+        value: info
+  - type: web
+    name: healthcare-web
+    runtime: static
+    buildCommand: npm --prefix frontend ci && npm --prefix frontend run build
+    staticPublishPath: ./frontend/dist
+    autoDeployTrigger: "off"
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: VITE_API_URL
+        sync: false
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+  - type: keyvalue
+    name: healthcare-cache
+    plan: 256mb
+    region: ohio
+    ipAllowList: []
+    maxmemoryPolicy: allkeys-lru
+    persistenceMode: "off"
+
+databases:
+  - name: healthcare-db
+    plan: 0.1c-256mb
+    region: ohio
+    postgresMajorVersion: "17"
+    databaseName: correctional_healthcare
+    user: healthcare_owner
+    ipAllowList: []
